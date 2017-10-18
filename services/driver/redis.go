@@ -21,9 +21,9 @@ import (
 	"math/rand"
 	"sync"
 
+	"github.com/jaegertracing/jaeger-lib/metrics"
 	"github.com/opentracing/opentracing-go"
 	"github.com/opentracing/opentracing-go/ext"
-	"github.com/uber/jaeger-lib/metrics"
 	"go.uber.org/zap"
 
 	"github.com/dstroot/hotrod/pkg/delay"

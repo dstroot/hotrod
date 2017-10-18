@@ -15,8 +15,8 @@
 package driver
 
 import (
+	"github.com/jaegertracing/jaeger-lib/metrics"
 	"github.com/opentracing/opentracing-go"
-	"github.com/uber/jaeger-lib/metrics"
 	"github.com/uber/tchannel-go"
 	"github.com/uber/tchannel-go/thrift"
 	"go.uber.org/zap"

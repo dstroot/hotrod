@@ -18,8 +18,8 @@ import (
 	"encoding/json"
 	"net/http"
 
+	"github.com/jaegertracing/jaeger-lib/metrics"
 	"github.com/opentracing/opentracing-go"
-	"github.com/uber/jaeger-lib/metrics"
 	"go.uber.org/zap"
 
 	"github.com/dstroot/hotrod/pkg/httperr"
