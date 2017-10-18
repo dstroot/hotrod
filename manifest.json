@@ -1,0 +1,19 @@
+{
+    "dependencies": {
+        "github.com/opentracing/opentracing-go": {
+            "branch": "master"
+        },
+        "github.com/spf13/cobra": {
+            "branch": "master"
+        },
+        "github.com/spf13/viper": {
+            "branch": "master"
+        },
+        "github.com/uber/jaeger": {
+            "branch": "master"
+        },
+        "go.uber.org/zap": {
+            "branch": "master"
+        }
+    }
+}
