@@ -24,8 +24,6 @@ import (
 	"go.uber.org/zap"
 
 	"github.com/dstroot/hotrod/pkg/log"
-	"github.com/dstroot/hotrod/pkg/pool"
-	"github.com/dstroot/hotrod/services/config"
 	"github.com/dstroot/hotrod/services/driver/thrift-gen/driver"
 )
 
@@ -37,7 +35,6 @@ type Server struct {
 	ch       *tchannel.Channel
 	server   *thrift.Server
 	redis    *Redis
-	pool     *pool.Pool
 }
 
 // NewServer creates a new driver.Server
@@ -58,7 +55,6 @@ func NewServer(hostPort string, tracer opentracing.Tracer, metricsFactory metric
 		ch:       ch,
 		server:   server,
 		redis:    newRedis(metricsFactory, logger),
-		pool:     pool.New(config.RouteWorkerPoolSize),
 	}
 }
 
