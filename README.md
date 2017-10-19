@@ -32,11 +32,7 @@ Jaeger UI can be accessed at http://localhost:16686.
 ### Run HotROD Application
 
 ```
-go get github.com/uber/jaeger
-cd $GOPATH/src/github.com/uber/jaeger
-make install
-cd examples/hotrod
-go run ./main.go all
+./build.sh
 ```
 
 Then open http://127.0.0.1:8080
