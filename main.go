@@ -3,12 +3,10 @@
 package main
 
 import (
-	"runtime"
-
-	"github.com/uber/jaeger/examples/hotrod/cmd"
+	"github.com/dstroot/hotrod/cmd"
 )
 
 func main() {
-	runtime.GOMAXPROCS(runtime.NumCPU())
+	// runtime.GOMAXPROCS(runtime.NumCPU())
 	cmd.Execute()
 }

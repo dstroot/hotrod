@@ -18,10 +18,10 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/jaegertracing/jaeger-client-go/config"
-	"github.com/jaegertracing/jaeger-client-go/rpcmetrics"
-	"github.com/jaegertracing/jaeger-lib/metrics"
 	"github.com/opentracing/opentracing-go"
+	"github.com/uber/jaeger-client-go/config"
+	"github.com/uber/jaeger-client-go/rpcmetrics"
+	"github.com/uber/jaeger-lib/metrics"
 	"go.uber.org/zap"
 
 	"github.com/dstroot/hotrod/pkg/log"

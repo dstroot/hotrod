@@ -16,15 +16,12 @@ package driver
 
 import (
 	"context"
-	"errors"
 	"fmt"
 	"math/rand"
-	"sync"
 
-	"github.com/jaegertracing/jaeger-lib/metrics"
 	"github.com/opentracing/opentracing-go"
 	"github.com/opentracing/opentracing-go/ext"
-	"go.uber.org/zap"
+	"github.com/uber/jaeger-lib/metrics"
 
 	"github.com/dstroot/hotrod/pkg/delay"
 	"github.com/dstroot/hotrod/pkg/log"
@@ -36,7 +33,7 @@ import (
 type Redis struct {
 	tracer opentracing.Tracer // simulate redis as a separate process
 	logger log.Factory
-	errorSimulator
+	// errorSimulator
 }
 
 func newRedis(metricsFactory metrics.Factory, logger log.Factory) *Redis {
@@ -48,6 +45,7 @@ func newRedis(metricsFactory metrics.Factory, logger log.Factory) *Redis {
 
 // FindDriverIDs finds IDs of drivers who are near the location.
 func (r *Redis) FindDriverIDs(ctx context.Context, location string) []string {
+	// create a tracing span "FindDriverIDs"
 	if span := opentracing.SpanFromContext(ctx); span != nil {
 		span := r.tracer.StartSpan("FindDriverIDs", opentracing.ChildOf(span.Context()))
 		span.SetTag("param.location", location)
@@ -55,18 +53,22 @@ func (r *Redis) FindDriverIDs(ctx context.Context, location string) []string {
 		defer span.Finish()
 		ctx = opentracing.ContextWithSpan(ctx, span)
 	}
+
 	// simulate RPC delay
 	delay.Sleep(config.RedisFindDelay, config.RedisFindDelayStdDev)
 
+	// make up 10 random driver IDs
 	drivers := make([]string, 10)
 	for i := range drivers {
 		drivers[i] = fmt.Sprintf("T7%05dC", rand.Int()%100000)
 	}
+
 	return drivers
 }
 
 // GetDriver returns driver and the current car location
 func (r *Redis) GetDriver(ctx context.Context, driverID string) (Driver, error) {
+	// create a tracing span "GetDriver"
 	if span := opentracing.SpanFromContext(ctx); span != nil {
 		span := r.tracer.StartSpan("GetDriver", opentracing.ChildOf(span.Context()))
 		span.SetTag("param.driverID", driverID)
@@ -74,15 +76,18 @@ func (r *Redis) GetDriver(ctx context.Context, driverID string) (Driver, error) 
 		defer span.Finish()
 		ctx = opentracing.ContextWithSpan(ctx, span)
 	}
+
 	// simulate RPC delay
 	delay.Sleep(config.RedisGetDelay, config.RedisGetDelayStdDev)
-	if err := r.checkError(); err != nil {
-		if span := opentracing.SpanFromContext(ctx); span != nil {
-			ext.Error.Set(span, true)
-		}
-		r.logger.For(ctx).Error("redis timeout", zap.String("driver_id", driverID), zap.Error(err))
-		return Driver{}, err
-	}
+
+	// simulate a possible timeout
+	// if err := r.checkError(); err != nil {
+	// 	if span := opentracing.SpanFromContext(ctx); span != nil {
+	// 		ext.Error.Set(span, true)
+	// 	}
+	// 	r.logger.For(ctx).Error("redis timeout", zap.String("driver_id", driverID), zap.Error(err))
+	// 	return Driver{}, err
+	// }
 
 	return Driver{
 		DriverID: driverID,
@@ -90,22 +95,23 @@ func (r *Redis) GetDriver(ctx context.Context, driverID string) (Driver, error) 
 	}, nil
 }
 
-var errTimeout = errors.New("redis timeout")
+// var errTimeout = errors.New("redis timeout")
 
-type errorSimulator struct {
-	sync.Mutex
-	countTillError int
-}
+// type errorSimulator struct {
+// 	sync.Mutex
+// 	countTillError int
+// }
 
-func (es *errorSimulator) checkError() error {
-	es.Lock()
-	es.countTillError--
-	if es.countTillError > 0 {
-		es.Unlock()
-		return nil
-	}
-	es.countTillError = 5
-	es.Unlock()
-	delay.Sleep(2*config.RedisGetDelay, 0) // add more delay for "timeout"
-	return errTimeout
-}
+//
+// func (es *errorSimulator) checkError() error {
+// 	es.Lock()
+// 	es.countTillError--
+// 	if es.countTillError > 0 {
+// 		es.Unlock()
+// 		return nil
+// 	}
+// 	es.countTillError = 5
+// 	es.Unlock()
+// 	delay.Sleep(2*config.RedisGetDelay, 0) // add more delay for "timeout"
+// 	return errTimeout
+// }

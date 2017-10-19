@@ -1,5 +1,5 @@
 {
-    "memo": "eb6e615bae2f8f6e4ca318fdf4dfea47df44c7cc0f0f7f94590e0621aab5751e",
+    "memo": "79c577a513d2d681cc53de5e9780f894ef87d42350e59d33ff00e50fe7a16596",
     "projects": [
         {
             "name": "github.com/VividCortex/gohistogram",
@@ -56,24 +56,6 @@
             "revision": "76626ae9c91c4f2a10f34cad8ce83ea42c93bb75",
             "packages": [
                 "."
-            ]
-        },
-        {
-            "name": "github.com/jaegertracing/jaeger-client-go",
-            "version": "v2.9.0",
-            "revision": "3e3870040def0ebdaf65a003863fa64f5cb26139",
-            "packages": [
-                "config",
-                "rpcmetrics"
-            ]
-        },
-        {
-            "name": "github.com/jaegertracing/jaeger-lib",
-            "version": "v1.1.0",
-            "revision": "3b2a9ad2a045881ab7a0f81d465be54c8292ee4f",
-            "packages": [
-                "metrics",
-                "metrics/go-kit/expvar"
             ]
         },
         {
@@ -183,20 +165,10 @@
             ]
         },
         {
-            "name": "github.com/uber/jaeger",
-            "branch": "master",
-            "revision": "20609a0d2cd03cc5d9d64f17153a27c7d7b327e8",
-            "packages": [
-                "examples/hotrod/cmd",
-                "examples/hotrod/pkg/log"
-            ]
-        },
-        {
             "name": "github.com/uber/jaeger-client-go",
             "version": "v2.9.0",
             "revision": "3e3870040def0ebdaf65a003863fa64f5cb26139",
             "packages": [
-                ".",
                 "config",
                 "rpcmetrics"
             ]

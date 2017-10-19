@@ -22,7 +22,7 @@ var (
 	// 'frontend' service
 
 	// WorkerPoolSize is the size of goroutine pool used to query for routes
-	WorkerPoolSize = 3
+	WorkerPoolSize = 100
 
 	// 'customer' service
 
@@ -34,7 +34,7 @@ var (
 	MySQLGetDelayStdDev = MySQLGetDelay / 10
 
 	// RouteWorkerPoolSize is the size of the worker pool used to query `route` service
-	RouteWorkerPoolSize = 3
+	RouteWorkerPoolSize = 100
 
 	// 'driver' service
 
@@ -45,7 +45,7 @@ var (
 	RedisFindDelayStdDev = RedisFindDelay / 4
 
 	// RedisGetDelay is how long retrieving a driver record takes
-	RedisGetDelay = 10 * time.Millisecond
+	RedisGetDelay = 30 * time.Millisecond
 
 	// RedisGetDelayStdDev is standard deviation
 	RedisGetDelayStdDev = RedisGetDelay / 4

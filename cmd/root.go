@@ -20,11 +20,11 @@ import (
 	"os"
 	"time"
 
-	"github.com/jaegertracing/jaeger-lib/metrics"
-	"github.com/jaegertracing/jaeger-lib/metrics/go-kit"
-	"github.com/jaegertracing/jaeger-lib/metrics/go-kit/expvar"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
+	"github.com/uber/jaeger-lib/metrics"
+	"github.com/uber/jaeger-lib/metrics/go-kit"
+	"github.com/uber/jaeger-lib/metrics/go-kit/expvar"
 	"go.uber.org/zap"
 )
 
